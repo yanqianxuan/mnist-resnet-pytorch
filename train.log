@@ -1,0 +1,10 @@
+Epoch [1/10] Loss: 0.1465, Val Acc: 97.88%
+Epoch [2/10] Loss: 0.0670, Val Acc: 98.51%
+Epoch [3/10] Loss: 0.0516, Val Acc: 99.08%
+Epoch [4/10] Loss: 0.0429, Val Acc: 99.13%
+Epoch [5/10] Loss: 0.0397, Val Acc: 99.01%
+Epoch [6/10] Loss: 0.0355, Val Acc: 98.87%
+Epoch [7/10] Loss: 0.0318, Val Acc: 98.92%
+Epoch [8/10] Loss: 0.0300, Val Acc: 99.24%
+Epoch [9/10] Loss: 0.0269, Val Acc: 98.84%
+Epoch [10/10] Loss: 0.0256, Val Acc: 99.18%
