@@ -7,17 +7,22 @@ import os
 from resnet_model import ResNetMNIST, BasicBlock
 
 def predict(image_path):
-
+   
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
    
+  
     model = ResNetMNIST(block=BasicBlock, layers=[2, 2, 2, 2])
     model.load_state_dict(torch.load("best_model.pt", map_location=device))
     model.to(device)
     model.eval()
   
+   
     transform = transforms.Compose([
         transforms.Resize((28, 28)),
         transforms.Grayscale(num_output_channels=1),
+       
+        transforms.RandomInvert(p=1.0), 
+       
         transforms.ToTensor(),
         transforms.Normalize((0.1307,), (0.3081,))
     ])
@@ -29,18 +34,15 @@ def predict(image_path):
 
     with torch.no_grad():
         output = model(image_tensor)
- 
         prob = F.softmax(output, dim=1)
         pred = torch.argmax(prob, dim=1).item()
         confidence = torch.max(prob).item()
         
-    print(f"🖼️ 图片路径: {image_path}")
-    print(f"🔮 预测结果: {pred}")
-    print(f"📊 置信度: {confidence:.2%}")
+    print(f"图片路径: {image_path}")
+    print(f"预测结果: {pred}")
+    print(f"置信度: {confidence:.2%}")
 
 if __name__ == "__main__":
-    # 你可以把这里改为你本地图片的文件名
-    # 例如：predict("my_handwritten_digit.png")
     test_img = "test_image.png" 
     if os.path.exists(test_img):
         predict(test_img)
